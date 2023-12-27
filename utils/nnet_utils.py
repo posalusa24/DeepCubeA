@@ -31,7 +31,7 @@ def make_batches(states_nnet: List[np.ndarray],  outputs: np.ndarray,
                  batch_size: int) -> List[Tuple[List[np.ndarray], np.ndarray]]:
     num_examples = outputs.shape[0]
     rand_idxs = np.random.choice(num_examples, num_examples, replace=False)
-    outputs = outputs.astype(float32)
+    outputs = outputs.astype(np.float32)
 
     start_idx = 0
     batches = []
@@ -77,7 +77,7 @@ def train_nnet(nnet: nn.Module, states_nnet: List[np.ndarray], outputs: np.ndarr
 
         # get data
         inputs_batch, targets_batch_np = batches[batch_idx]
-        targets_batch_np = targets_batch_np.astype(float32)
+        targets_batch_np = targets_batch_np.astype(np.float32)
 
         # send data to device
         states_batch: List[Tensor] = states_nnet_to_pytorch_input(inputs_batch, device)
